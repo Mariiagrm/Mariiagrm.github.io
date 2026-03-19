@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - María García Miñarro</title>
+    <link rel="stylesheet" href="../style.css">
+   
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="container">
+        
+        <div class="lang-selector">
+            <a href="#" class="lang-flag" title="English">🇬🇧</a>
+            <a href="#" class="lang-flag" title="Español">🇪🇸</a>
+            <a href="#" class="lang-flag" title="Français">🇫🇷</a>
+        </div>
+
+        
+        <div class="left-col">
+            <div class="header-section">
+                <div class="chip">
+                    <img src="../images/chip_logo.png" alt="LinkedIn">
+                </div>
+                <h1>MARÍA GARCÍA<br>MIÑARRO</h1>
+            </div>
+
+            <div class="photo-container">
+                <div class="job-title">INGENÍERA<br>INFORMÁTICA<br> Mención en Computadores </div>
+                
+                <img src="../images/fotoMaria.jpeg" alt="María García Miñarro" class="profile-img">
+                
+                <div class="sticker">
+                    <span>💫</span>
+                </div>
+            </div>
+
+            <div class="about-box">
+                ABOUT:
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/mariagarciaminarro/"target="_blank" rel="noopener noreferrer" class="social-icon linkedin" title="LinkedIn">
+                    <img src="../images/Linked.png" alt="LinkedIn">
+                </a>
+                <a href="https://github.com/Mariiagrm" target="_blank" rel="noopener noreferrer" class="social-icon github" title="GitHub">
+                    <img src="../images/github.png" alt="GitHub">
+                </a>
+                <a href="https://www.youtube.com/@ThMaria-V" target="_blank" rel="noopener noreferrer" class="social-icon youtube" title="YouTube">
+                    <img src="../images/Youtube.png" alt="YouTube">
+                </a>
+                <a href="#" class="blog-btn" title="Blog">
+                    BL<br>OG
+                </a>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <a href="#" class="nav-btn btn-white">ESTUDIOS</a>
+            <a href="./techstack.html" class="nav-btn btn-yellow">TECH STACK</a>
+            <a href="./proectos_destacados.html" class="nav-btn btn-white">PROYECTOS<br>DESTACADOS</a>
+            <a href="#" class="nav-btn btn-pink">EXPERIENCIA</a>
+            <a href="#" class="nav-btn btn-yellow">LÍNEA TEMPORAL</a>
+        </div>
+
+        <a href="./contacta.html" class="contact-btn">CONTACTO</a>
+
+    </div>
+
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Seleccionamos todos los enlaces de la página que no se abran en una pestaña nueva
+        const links = document.querySelectorAll('a[href]:not([target="_blank"])');
+        
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+
+                // Si el enlace es solo un '#' (como los botones sin ruta aún), no hacemos nada
+                if (targetUrl === '#' || targetUrl.startsWith('#')) return;
+                
+                // 1. Evitamos que la página cambie de golpe
+                e.preventDefault();
+
+                // 2. Le añadimos al body la clase para que se desvanezca hacia abajo
+                document.body.classList.add('page-exit');
+
+                // 3. Esperamos 500 milisegundos (0.5s) a que termine la animación y entonces cambiamos de URL
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 500);
+            });
+        });
+    });
+</script>

@@ -1,0 +1,73 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - María García Miñarro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body>
+
+    <a href="index.html" class="home-icon" title="Volver al Inicio">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="decorative-line"></div>
+
+    <div class="page-container">
+        <h1 class="page-title">PROYECTOS DESTACADOS</h1>
+
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="project-img-container">
+                    <img src="ruta-a-tu-imagen.jpg" alt="Proyecto 1">
+                </div>
+                <h3 class="project-title">Nombre del Proyecto</h3>
+                <div class="project-links">
+                    <a href="#">GITHUB</a>
+                    <a href="#">ENLACE A BLOG</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-container">
+                    <img src="ruta-a-tu-imagen.jpg" alt="Proyecto 2">
+                </div>
+                <h3 class="project-title">Nombre del Proyecto</h3>
+                <p class="project-desc">Breve descripción de este proyecto y lo que se desarrolló.</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-container">
+                    <img src="ruta-a-tu-imagen.jpg" alt="Proyecto 3">
+                </div>
+                <h3 class="project-title">Nombre del Proyecto</h3>
+                <p class="project-desc">Breve descripción de este proyecto y lo que se desarrolló.</p>
+            </div>
+
+            </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const links = document.querySelectorAll('a[href]:not([target="_blank"])');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetUrl = this.getAttribute('href');
+                    if (targetUrl === '#' || targetUrl.startsWith('#')) return;
+                    
+                    e.preventDefault();
+                    document.body.classList.add('page-exit');
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 500);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - María García Miñarro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body class= "contacta-body">
+
+    <a href="index.html" style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #333; text-decoration: none;">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="contact-container">
+        
+        <div class="left-col">
+            <div class="map-wrapper">
+                <div class="badge-contact">¡Contacta!</div>
+                <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50325.32623351296!2d-1.742111244033324!37.67448373722956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd64cbf239f157bb%3A0xeab50d8804868e!2sLorca%2C%20Murcia!5e0!3m2!1ses!2ses!4v1710800000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div class="info-box">
+                <p><b>DIRECCION: </b> LORCA, ESPAÑA</p>
+                <p><b>CORREO:</b> mariagarciaminarro2004@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="contact-header">
+                <hr>
+                <h1>Contacto</h1>
+                <hr>
+            </div>
+
+<div class="contact-form">
+    
+    <form id="contact-form" action="https://formspree.io/f/xlgpaywg" method="POST">
+        <div class="input-group">
+            <label for="nombre">NOMBRE:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">EMAIL:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="input-group align-top">
+            <label for="mensaje">MENSAJE:</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-sticker" title="Enviar Mensaje">
+            <i class="far fa-paper-plane"></i>
+        </button>
+        
+    </form>
+    
+    <div id="toast" class="toast">
+        Mensaje recibido con éxito por María García Miñarro, le contestará en breve. 
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+    const contactForm = document.getElementById('contact-form');
+    const toast = document.getElementById('toast');
+
+    contactForm.addEventListener('submit', async function(event) {
+        // 1. Evitamos que la página salte a la web de Formspree
+        event.preventDefault();
+
+        // 2. Preparamos los datos del formulario
+        const data = new FormData(contactForm);
+
+        try {
+            // 3. Enviamos los datos a Formspree "por detrás"
+            const response = await fetch(contactForm.action, {
+                method: contactForm.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            // 4. Si Formspree dice que OK, mostramos el toast
+            if (response.ok) {
+                toast.classList.add('show'); // Mostramos la burbuja
+                contactForm.reset();         // Vaciamos las cajas de texto
+
+                // Ocultamos la burbuja a los 3 segundos
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 5000);
+            } else {
+                alert("Uy, hubo un problema al enviar el formulario. Inténtalo de nuevo.");
+            }
+        } catch (error) {
+            alert("Error de conexión. Revisa tu internet y vuelve a intentarlo.");
+        }
+    });
+</script>

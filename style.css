@@ -1,0 +1,1102 @@
+ 
+  
+        :root {
+            --bg-green: #084c3a;
+            --btn-yellow: #ffe65a;
+            --btn-pink: #ff9dce;
+            --text-dark: #000000;
+            --text-light: #ffffff;
+
+            --bg-lavender: #b9a9d9;
+            --card-white: #ffffff;
+            --text-blue: #2b57f2;
+            --text-purple: #8a4fff;
+
+          
+}
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+    font-family: 'FuenteTitulos'; /* Nombre que usarás en CSS */
+    src: url('fonts/mekuria_salten/Mekuria Salten TTF.ttf') format('truetype'); /* Ruta al archivo TTF */
+    font-weight: normal;
+    font-style: normal;
+    }
+
+            @font-face {
+    font-family: 'FuenteMaquina'; /* Nombre que usarás en CSS */
+    src: url('fonts/type_machine/Type Machine.ttf') format('truetype'); /* Ruta al archivo TTF */
+    font-weight: normal;
+    font-style: normal;
+    }
+
+
+
+    
+
+
+        body {
+            font-family: 'FuenteTitulos';
+            background-color: var(--bg-green);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+
+            
+            /* La página entra desde un poco más arriba (-30px) hasta su posición original (0) */
+            animation: fadeInDown 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            /* Nos aseguramos de que el body pueda transicionar cuando le añadamos la clase de salida */
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- ANIMACIÓN DE SALIDA (Al hacer clic en un enlace) --- */
+        /* Esta clase se la añadiremos con JavaScript justo antes de cambiar de página */
+        .page-exit {
+            opacity: 0 !important;
+            transform: translateY(40px) !important; /* Se desliza hacia abajo */
+        }
+        
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* --- COLUMNA IZQUIERDA (Perfil) --- */
+        .left-col {
+            flex: 1;
+            min-width: 400px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-section {
+            position: relative;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        /* Estrella rosa detrás del nombre */
+        .chip {
+            position: absolute;
+            top: -40px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            z-index: -1;
+        }
+        .chip img {
+            
+            max-width: 100%;
+            max-height: 100%;
+            z-index: -1;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-left: 50px;
+        }
+
+                /* --- SELECTOR DE IDIOMAS --- */
+        .lang-selector {
+            position: absolute;
+            top: -10px;        /* Sube o baja la píldora */
+            right: 40px;       /* CÁMBIALO A "left: 40px;" SI LO QUIERES A LA IZQUIERDA */
+            background-color: #cca8e9; /* Color lila */
+            padding: 8px 20px;
+            border-radius: 30px; /* Forma de píldora */
+            display: flex;
+            gap: 12px;         /* Espacio entre las banderas */
+            z-index: 100;      /* Asegura que quede por encima de todo */
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* Sombrilla estilo scrapbook */
+        }
+
+        .lang-flag {
+            text-decoration: none;
+            font-size: 1.6rem; /* Tamaño de las banderas */
+            transition: transform 0.2s ease;
+        }
+
+        /* Efecto al pasar el ratón por encima de una bandera */
+        .lang-flag:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Ajuste para móviles */
+        @media (max-width: 900px) {
+            .lang-selector {
+                top: 10px;
+                right: auto;    /* Quita el anclaje a la derecha */
+                left: 50%;      /* Lo centra */
+                transform: translateX(-50%); 
+            }
+        }
+
+        /* Contenedor de la foto principal */
+        .photo-container {
+            position: relative;
+            /* Le restamos los 40px de margen al 100% para que no se desborde */
+            width: calc(100% - 40px); 
+            max-width: 450px;
+            aspect-ratio: 1.2 / 1; /* Hacemos que sea un poco menos ancha para que parezca más un huevo/óvalo */
+            margin-left: 40px;
+            margin-top: -20px;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center; 
+            border-radius: 50%; /* Un 50% en un contenedor rectangular crea un óvalo perfecto */
+            background-color: #d1c8c0;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* Un toque opcional de sombra para separarlo del fondo */
+        }
+
+        /* Etiqueta blanca de la profesión */
+        .job-title {
+            position: absolute;
+            top: 20px;
+            left: -100px;
+            background: white;
+            color: black;
+            padding: 10px 20px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-align: center;
+            z-index: 3;
+        }
+
+        /* Sticker de la estrella fugaz */
+        .sticker {
+            position: absolute;
+            bottom: -30px;
+            right: 0px;
+            width: 120px;
+            height: 120px;
+            background-color: #1fc182;
+            border-radius: 50%;
+            border: 4px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            z-index: 3;
+            transform: rotate(-15deg);
+        }
+
+        /* Caja de "About" */
+        .about-box {
+            background: white;
+            font-family: 'FuenteMaquina';
+            color: black;
+            width: 350px;
+            height: 100px;
+            padding: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        /* Iconos Sociales */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            align-items: center;
+        }
+
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            overflow: hidden; /* Asegura que la imagen no se salga si es muy grande */
+    transition: transform 0.2s ease;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.15); /* Sombra tipo recorte */
+            transition: transform 0.2s;
+        }
+
+        .social-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            width: 70%;  /* Ajusta este % para que el logo respire dentro del cuadro */
+            height: 70%;
+            object-fit: contain; /* Mantiene la proporción de tu foto/svg */
+        }
+
+   
+
+        /* Efecto al pasar el ratón (Hover) */
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg); /* Efecto casual de pegatina */
+        }
+        .linkedin { background: #0077b5; }
+     /* Mantener la forma circular solo para GitHub si lo deseas */
+        .github {
+            border-radius: 50% !important;
+        }
+
+        .github img {
+            width: 60%; /* A veces los logos circulares necesitan ser un poco más pequeños */
+        }        .youtube { background: #ff0000; }
+        
+        .blog-btn {
+            background: white;
+            color: black;
+            font-weight: 900;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1.1;
+            font-size: 14px;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .blog-btn:hover { transform: scale(1.1); }
+
+
+        /* --- COLUMNA DERECHA (Navegación) --- */
+        .right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding-top: 20px;
+        }
+
+      /* --- ESTILO CASUAL PARA LOS BOTONES --- */
+
+        /* Asegúrate de que los botones mantengan su base */
+        .nav-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            padding: 15px 20px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            /* Sombras duras para que parezcan recortes de papel */
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.15); 
+            transition: all 0.2s ease;
+        }
+
+        /* Efecto hover: se levantan un poco al pasar el ratón */
+        .nav-btn:hover {
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+            transform: scale(1.02) !important; /* El !important asegura que sobreescriba la rotación al hacer hover */
+            z-index: 10;
+        }
+
+        /* Aquí viene la magia: Desordenamos cada botón individualmente */
+
+        /* 1. EXPERIENCIA (Blanco) - Movido a la izquierda */
+        .right-col .nav-btn:nth-child(1) {
+            background-color:var(--text-light);
+            margin-left: -40px;
+            transform: rotate(-1deg);
+        }
+
+        /* 2. TECH STACK (Amarillo) - Movido a la derecha */
+        .right-col .nav-btn:nth-child(2) {
+            background-color:var(--btn-yellow);
+            margin-left: 50px;
+            transform: rotate(1.5deg);
+        }
+
+        /* 3. PROYECTOS DESTACADOS (Blanco) - Ligeramente a la izquierda */
+        .right-col .nav-btn:nth-child(3) {
+            background-color:var(--text-light);
+            margin-left: -20px;
+            transform: rotate(-0.5deg);
+        }
+
+        /* 4. EXPERIENCIA (Rosa) - Movido bastante a la derecha */
+        .right-col .nav-btn:nth-child(4) {
+            background-color:var(--btn-pink);
+            margin-left: 60px;
+            transform: rotate(2deg);
+        }
+
+        /* 5. TIMELINE (Amarillo) - Centrado pero con inclinación */
+        .right-col .nav-btn:nth-child(5) {
+            background-color:var(--btn-yellow);
+            margin-left: 10px;
+            transform: rotate(-1.5deg);
+        }
+        /* Botón de Contacto (Abajo a la derecha) */
+        .contact-btn {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background-color: var(--btn-yellow);
+            color: black;
+            text-decoration: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            transition: transform 0.2s;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- RESPONSIVE DESIGN (Móviles) --- */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 100px; /* Espacio para el botón de contacto */
+            }
+            .left-col {
+                min-width: 100%;
+                align-items: center;
+            }
+            h1 { margin-left: 0; text-align: center; font-size: 2.5rem; }
+            .chip { left: 10%; top: -20px; }
+            .photo-container { margin-left: 0; width: 100%; max-width: 400px; }
+            .job-title { left: 0; }
+            .about-box { width: 100%; max-width: 400px; }
+            .right-col { width: 100%; }
+            .nav-btn { width: 100%; max-width: 400px; font-size: 1.5rem; }
+            .contact-btn { position: relative; bottom: 0; right: 0; margin-top: 30px; }
+        }
+
+
+
+        /*----------------tech_stack-----------*/
+
+        .tech-body {
+    background-color: var(--bg-lavender);
+    font-family: 'FuenteTitulos';
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.tech-container {
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Título Estilo Tech Stack */
+.tech-title {
+    font-family: 'FuenteTitulos'; /* Usamos la fuente sin serifas y muy gruesa */
+    font-weight: 800;
+    font-size: 4.5rem;
+    color: white;
+    line-height: 1.1;
+    margin: 0;
+    margin-right: 40px; /* Le damos espacio para que no se pegue a las tarjetas */
+}
+
+/* --- CORRECCIÓN DE LA CUADRÍCULA --- */
+.grid-stack {
+    font-family: Prompt;
+    font-weight: bold;
+    display: grid;
+    /* Mágia aquí: 4 columnas en lugar de 3. La primera un pelín más ancha */
+    grid-template-columns: 1.2fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; /* 2 filas fijas */
+    gap: 20px;
+    flex-grow: 1;
+}
+
+
+/* Tarjeta Base */
+.stack-card {
+    background: var(--card-white);
+    border-radius: 40px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Tarjeta especial "Lenguajes" que ocupa más espacio */
+.long-card {
+    grid-row: 1 / 3; /* Le obligamos a ocupar desde la fila 1 hasta la 3 (ocupa 2 completas) */
+    grid-column: 1 / 2; /* Le obligamos a quedarse en la primera columna */
+    justify-content: center;
+}
+
+
+/* Botón "Related Projects" */
+.related-btn {
+    background-color: var(--bg-green);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'FuenteMaquina';
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.card-icon {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: none;
+}
+
+.text-blue { color: var(--text-blue); }
+.text-purple { color: var(--text-purple); }
+.text-purple-light { color: #a372ff; }
+
+
+
+/* Icono Rosa "+" */
+.plus-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--btn-pink);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+/* EFECTO HOVER: Solo el icono */
+.plus-icon:hover {
+    transform: scale(1.2) rotate(90deg); /* Crece y gira */
+    background-color: #ff5ebc; /* Un rosa un poco más intenso */
+    box-shadow: 0 0 10px rgba(255, 94, 188, 0.5); /* Brillo sutil */
+}
+
+/* Icono Home */
+.home-icon {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    font-size: 2.5rem;
+    color: #111;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .tech-container { flex-direction: column; }
+    .grid-stack { grid-template-columns: 1fr 1fr; }
+    .long-card { grid-row: auto; }
+}
+
+/* Caja bocadillo para mostrar lenguajes */
+/* --- ESTILOS DEL BOCADILLO EMERGENTE --- */
+.bocadillo {
+   position: absolute;
+    /* Lo elevamos bastante para que no tape la tarjeta */
+    bottom: calc(100% + 5); 
+    left: -50px; /* Lo centramos un poco respecto a la tarjeta */
+    background-color: white;
+    color: #111;
+    width: 380px; /* Más ancho para que quepan las columnas */
+    padding: 30px;
+    border-radius: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    display: flex;
+    gap: 30px;
+    z-index: 100;
+    font-family: 'Outfit', sans-serif;
+    
+    /* Animación */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* El piquito del bocadillo apuntando hacia abajo */
+.bocadillo::after {
+    content: "";
+   content: "";
+    position: absolute;
+    bottom: -40px; /* Altura de la flecha */
+    left: 80px;    /* Posición de la flecha */
+    border-left: 0px solid transparent; /* Lado izquierdo recto */
+    border-right: 50px solid transparent; /* Diagonal derecha */
+    border-top: 40px solid white; /* Color y forma superior */
+}
+
+/* Clase que añadiremos con JavaScript para mostrarlo */
+.show-bocadillo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* --- ESTILOS INTERNOS DE LAS COLUMNAS Y LISTAS --- */
+.tech-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tech-group h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.tech-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tech-group li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Tamaño fijo para los iconos para que el texto quede alineado */
+.tech-group li i {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Color para los iconos genéricos de FontAwesome */
+.text-gray {
+    color: #666;
+}
+
+
+/* Caja del modal blanca, para mostrar proyectos relacionados */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Efecto de desenfoque al fondo */
+}
+
+/* Caja del modal blanca, para mostrar proyectos relacionados */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeInModal 0.3s ease-out;
+}
+
+@keyframes fadeInModal {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Botón de cerrar (X) */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-btn:hover {
+    color: var(--text-purple);
+}
+
+
+
+/*----------------contacta-----------*/
+
+.contacta-body {
+            background-color: var(--bg-lavender);
+           font-family: 'FuenteTitulos';
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .contact-container {
+            width: 90%;
+            max-width: 1100px;
+            display: flex;
+            gap: 50px;
+            padding: 40px 0;
+            align-items: flex-start;
+        }
+
+        /* --- COLUMNA IZQUIERDA (Mapa y Dirección) --- */
+        .left-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 450px;
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        /* Etiqueta ovalada "¡Contacta!" */
+        .badge-contact {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            background-color: var(--bg-green);
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            padding: 10px 40px;
+            border-radius: 50px; /* Forma de píldora */
+            z-index: 10;
+            transform: rotate(-3deg);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        /* Caja de información debajo del mapa */
+        .info-box {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border: 1px solid #ccc; /* Borde fino como en el diseño */
+            font-family: 'Bodoni Moda', serif;
+            /*font-size: 1.1rem;*/
+            font-weight: 800;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.05);
+        }
+
+        .info-box p {
+            margin: 5px 0;
+        }
+
+        /* --- COLUMNA DERECHA (Formulario) --- */
+        .right-col {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Título central con líneas */
+        .contact-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-header hr {
+            border: none;
+            border-top: 3px solid #333;
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        .contact-header h1 {
+            color: white;
+            font-size: 4.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* Caja del formulario */
+        .contact-form {
+            background-color: white;
+            width: 100%;
+            border: 4px solid var(--text-purple); /* Borde lila */
+            border-radius: 30px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center; /* Centra verticalmente Nombre y Email */
+            margin-bottom: 25px;
+        }
+
+        .input-group.align-top {
+            align-items: flex-start; /* Alinea arriba el Mensaje */
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            width: 150px; /* Fija el ancho para que los inputs queden alineados */
+            color: black;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #999;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #999;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            margin-top: 10px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: var(--text-purple);
+        }
+
+        /* Botón de enviar (Pegatina amarilla) */
+        .submit-sticker {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            background-color: var(--btn-yellow);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: #111;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+
+        /* Efecto de líneas punteadas en el avión simulando vuelo */
+        .submit-sticker::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            width: 30px;
+            height: 20px;
+            border-bottom: 2px dashed #333;
+            border-left: 2px dashed #333;
+            border-bottom-left-radius: 20px;
+            transform: rotate(-20deg);
+        }
+
+        .submit-sticker:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+
+            /* --- ESTILOS DEL MENSAJE EMERGENTE (TOAST) --- */
+        .toast {
+            visibility: hidden;
+            background-color: var(--bg-green); 
+            color: white;
+            text-align: center;
+            border-radius: 30px; /* Forma redondeada */
+            padding:  30px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 50px; /* Empieza un poco más abajo */
+            transform: translateX(-50%); /* Lo centra perfectamente */
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.4s ease, bottom 0.4s ease; /* Animación suave */
+        }
+
+        /* Clase que se activa con JavaScript para mostrarlo */
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px; /* Sube un poco al aparecer */
+        }
+
+
+
+        /* --- RESPONSIVE (Móviles) --- */
+        @media (max-width: 900px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+            .left-col {
+                max-width: 100%;
+            }
+            .contact-header h1 {
+                font-size: 3rem;
+            }
+            .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .input-group label {
+                margin-bottom: 10px;
+            }
+            .input-group input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+
+
+/* --- proyectos destacados--- */
+
+
+        .page-exit {
+            opacity: 0 !important;
+            transform: translateY(40px) !important;
+        }
+
+        /* --- ESTRUCTURA PRINCIPAL --- */
+        .page-container {
+            width: 90%;
+            max-width: 1300px;
+            padding: 40px 0 80px 0; /* Espacio arriba y abajo */
+            position: relative;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- CUADRÍCULA DE PROYECTOS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columnas iguales */
+            gap: 40px 20px; /* Espacio entre filas y columnas */
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px); /* El proyecto sube un poco al pasar el ratón */
+        }
+
+        /* Imágenes circulares */
+        .project-img-container {
+            width: 100%;
+            max-width: 160px;
+            aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada perfecta */
+            border-radius: 50%; /* Lo hace un círculo perfecto */
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Evita que la foto se deforme */
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-img-container img {
+            transform: scale(1.1); /* Zoom a la imagen al hacer hover */
+        }
+
+        /* Textos del proyecto */
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            color: white;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Enlaces estilo GITHUB / BLOG */
+        .project-links {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .project-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--btn-yellow);
+        }
+
+        /* --- LÍNEA DECORATIVA LATERAL --- */
+        .decorative-line {
+            position: fixed;
+            right: 30px;
+            top: 15%;
+            bottom: 15%;
+            width: 10px;
+            border-radius: 20px;
+            /* Mitad amarilla, mitad rosa */
+            background: linear-gradient(to bottom, var(--btn-yellow) 50%, var(--btn-pink) 50%);
+            box-shadow: 2px 0px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        /* Icono Home */
+        .home-icon {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            z-index: 101;
+            transition: transform 0.2s ease;
+        }
+
+        .home-icon:hover {
+            transform: scale(1.1);
+            color: var(--btn-yellow);
+        }
+
+        /* --- RESPONSIVE (Móviles y Tablets) --- */
+        @media (max-width: 1100px) {
+            .projects-grid { grid-template-columns: repeat(4, 1fr); }
+            .page-title { font-size: 3rem; }
+        }
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: repeat(3, 1fr); }
+            .decorative-line { display: none; } /* Ocultamos la línea en pantallas pequeñas */
+        }
+        @media (max-width: 650px) {
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .page-title { font-size: 2.2rem; margin-bottom: 30px; }
+            .home-icon { top: 15px; left: 15px; font-size: 1.5rem; }
+        }
+        @media (max-width: 400px) {
+            .projects-grid { grid-template-columns: 1fr; }
+        }
